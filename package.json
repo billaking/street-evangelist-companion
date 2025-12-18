@@ -1,0 +1,26 @@
+{
+    "name": "street-evangelist-companion",
+    "version": "1.0.0",
+    "description": "Street Evangelist Companion - A mobile-first Obsidian plugin for street ministry",
+    "main": "main.js",
+    "scripts": {
+        "dev": "node esbuild.config.mjs",
+        "build": "node esbuild.config.mjs production"
+    },
+    "keywords": [
+        "obsidian",
+        "plugin",
+        "evangelism",
+        "street-ministry",
+        "christian"
+    ],
+    "author": "Greater Life Ministry",
+    "license": "MIT",
+    "devDependencies": {
+        "@types/node": "^16.11.6",
+        "builtin-modules": "^3.3.0",
+        "esbuild": "^0.17.3",
+        "obsidian": "latest",
+        "typescript": "^5.0.0"
+    }
+}

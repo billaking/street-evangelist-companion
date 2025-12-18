@@ -1,0 +1,10 @@
+{
+    "id": "street-evangelist-companion",
+    "name": "Street Evangelist Companion",
+    "version": "1.1.0",
+    "minAppVersion": "1.0.0",
+    "description": "A mobile-first tool for street ministry - learn evangelism history, track encounters, access doctrine references, and grow your outreach skills.",
+    "author": "Greater Life Ministry",
+    "authorUrl": "https://www.billaking.com",
+    "isDesktopOnly": false
+}

@@ -1,0 +1,28 @@
+{
+  "settings": {
+    "ministerName": "Minister",
+    "churchName": "",
+    "defaultTab": "overview",
+    "showDailyScripture": false,
+    "trackEncounters": false,
+    "createNotes": false,
+    "journalFolder": "Street Ministry/Journal",
+    "prayerFolder": "Street Ministry/Prayers",
+    "testimonyFolder": "Street Ministry/Testimonies",
+    "encounterFolder": "Street Ministry/Encounters",
+    "selectedDonationMethod": "paypal"
+  },
+  "data": {
+    "encounters": [],
+    "journalEntries": [],
+    "prayerRequests": [],
+    "testimonies": [],
+    "scriptureMemory": [],
+    "stats": {
+      "totalEncounters": 0,
+      "prayersOffered": 0,
+      "tractsShared": 0,
+      "salvations": 0
+    }
+  }
+}

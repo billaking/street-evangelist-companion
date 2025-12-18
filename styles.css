@@ -1,0 +1,3256 @@
+/**
+ * Street Evangelist Companion - Styles
+ * Mobile-first design system for street ministry
+ * Greater Life Ministry - https://www.billaking.com
+ * 
+ * NO OBSIDIAN CLASSES - Custom design system only
+ */
+
+/* ========================================
+   CSS VARIABLES / DESIGN TOKENS
+   ======================================== */
+:root {
+    /* Primary Colors - Golden/Harvest Theme */
+    --sec-gold: #f59e0b;
+    --sec-gold-dark: #d97706;
+    --sec-gold-light: #fbbf24;
+    
+    /* Spiritual Colors */
+    --sec-spirit: #8b5cf6;
+    --sec-spirit-dark: #7c3aed;
+    --sec-spirit-light: #a78bfa;
+    --sec-fire: #ef4444;
+    --sec-fire-dark: #dc2626;
+    --sec-hope: #22c55e;
+    --sec-hope-dark: #16a34a;
+    --sec-water: #3b82f6;
+    --sec-water-dark: #2563eb;
+    
+    /* Dark Theme (Default) */
+    --sec-bg: #0f172a;
+    --sec-bg-soft: #1e293b;
+    --sec-bg-muted: #334155;
+    --sec-bg-elevated: #3f4f66;
+    --sec-text: #f8fafc;
+    --sec-text-muted: #94a3b8;
+    --sec-text-dim: #64748b;
+    --sec-border: #475569;
+    --sec-border-light: #334155;
+    
+    /* Gradients */
+    --sec-gradient-gold: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+    --sec-gradient-spirit: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+    --sec-gradient-fire: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+    --sec-gradient-bg: linear-gradient(180deg, #0f172a 0%, #1e293b 100%);
+    
+    /* Spacing */
+    --sec-space-xs: 0.25rem;
+    --sec-space-sm: 0.5rem;
+    --sec-space-md: 1rem;
+    --sec-space-lg: 1.5rem;
+    --sec-space-xl: 2rem;
+    --sec-space-2xl: 3rem;
+    --sec-space-3xl: 4rem;
+    
+    /* Border Radius */
+    --sec-radius-sm: 0.375rem;
+    --sec-radius: 0.5rem;
+    --sec-radius-lg: 0.75rem;
+    --sec-radius-xl: 1rem;
+    --sec-radius-2xl: 1.5rem;
+    --sec-radius-full: 9999px;
+    
+    /* Shadows */
+    --sec-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+    --sec-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
+    --sec-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -2px rgba(0, 0, 0, 0.4);
+    --sec-shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 10px 10px -5px rgba(0, 0, 0, 0.4);
+    --sec-shadow-glow: 0 0 20px rgba(245, 158, 11, 0.3);
+    --sec-shadow-glow-spirit: 0 0 20px rgba(139, 92, 246, 0.3);
+    
+    /* Typography */
+    --sec-font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    --sec-font-serif: Georgia, 'Times New Roman', serif;
+    
+    /* Transitions */
+    --sec-transition: all 0.2s ease;
+    --sec-transition-slow: all 0.3s ease;
+    --sec-transition-spring: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* ========================================
+   PLUGIN ROOT - No Obsidian dependencies
+   ======================================== */
+.sec-plugin-root {
+    width: 100%;
+}
+
+/* ========================================
+   BASE CONTAINER
+   ======================================== */
+.sec-container {
+    display: flex;
+    flex-direction: column;
+    background: var(--sec-bg);
+    color: var(--sec-text);
+    font-family: var(--sec-font-sans);
+    line-height: 1.6;
+}
+
+.sec-container * {
+    box-sizing: border-box;
+}
+
+/* ========================================
+   HEADER
+   ======================================== */
+.sec-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--sec-space-md) var(--sec-space-lg);
+    background: var(--sec-bg-soft);
+    border-bottom: 1px solid var(--sec-border);
+    flex-shrink: 0;
+}
+
+.sec-header-title {
+    display: flex;
+    align-items: center;
+    gap: var(--sec-space-sm);
+}
+
+.sec-header-icon {
+    font-size: 1.5rem;
+    animation: sec-pulse 2s ease-in-out infinite;
+}
+
+@keyframes sec-pulse {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.1); opacity: 0.8; }
+}
+
+.sec-header h1 {
+    font-size: 1.125rem;
+    font-weight: 700;
+    margin: 0;
+    background: var(--sec-gradient-gold);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.sec-header-actions {
+    display: flex;
+    gap: var(--sec-space-sm);
+}
+
+/* ========================================
+   NAVIGATION TABS
+   ======================================== */
+.sec-nav {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px;
+    background: var(--sec-bg-soft);
+    border-bottom: 1px solid var(--sec-border);
+    flex-shrink: 0;
+    gap: 4px;
+    min-height: 60px;
+}
+
+.sec-nav-tab {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    padding: 8px 4px;
+    background: transparent;
+    border: none;
+    border-radius: var(--sec-radius);
+    color: var(--sec-text-muted);
+    font-weight: 500;
+    cursor: pointer;
+    transition: var(--sec-transition);
+    flex: 1;
+    position: relative;
+    height: auto;
+    min-height: 44px;
+}
+
+.sec-nav-tab::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 50%;
+    transform: translateX(-50%) scaleX(0);
+    width: 24px;
+    height: 3px;
+    background: var(--sec-gold);
+    border-radius: var(--sec-radius-full);
+    transition: var(--sec-transition-spring);
+}
+
+.sec-nav-tab:hover {
+    color: var(--sec-text);
+    background: var(--sec-bg-muted);
+}
+
+.sec-nav-tab.active {
+    color: var(--sec-gold);
+}
+
+.sec-nav-tab.active::after {
+    transform: translateX(-50%) scaleX(1);
+}
+
+.sec-nav-tab.active .sec-nav-icon {
+    transform: scale(1.1);
+}
+
+.sec-nav-icon {
+    font-size: 20px;
+    line-height: 1;
+    display: block;
+}
+
+.sec-nav-label {
+    font-size: 11px;
+    line-height: 1;
+    display: block;
+    white-space: nowrap;
+}
+
+/* Mobile: Smaller tabs */
+@media (max-width: 480px) {
+    .sec-nav {
+        padding: 6px;
+        min-height: 54px;
+    }
+    
+    .sec-nav-tab {
+        padding: 6px 2px;
+        min-height: 40px;
+    }
+    
+    .sec-nav-icon {
+        font-size: 18px;
+    }
+    
+    .sec-nav-label {
+        font-size: 9px;
+    }
+}
+    }
+}
+
+/* ========================================
+   MAIN CONTENT AREA - Height set by JavaScript
+   ======================================== */
+.sec-content {
+    padding: var(--sec-space-md);
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Desktop padding */
+@media (min-width: 481px) {
+    .sec-content {
+        padding: var(--sec-space-lg);
+    }
+}
+
+.sec-content::-webkit-scrollbar {
+    width: 6px;
+}
+
+.sec-content::-webkit-scrollbar-track {
+    background: var(--sec-bg);
+}
+
+.sec-content::-webkit-scrollbar-thumb {
+    background: var(--sec-border);
+    border-radius: var(--sec-radius-full);
+}
+
+/* ========================================
+   VIEW CONTAINERS (Tab Content)
+   ======================================== */
+.sec-view {
+    display: none;
+    animation: sec-fadeIn 0.3s ease;
+}
+
+.sec-view.active {
+    display: block;
+}
+
+/* Ensure doctrine and timeline content doesn't overflow */
+.sec-doctrine-content,
+.sec-timeline-content,
+.sec-journal-content,
+.sec-ministry-content {
+    padding-bottom: var(--sec-space-md);
+}
+
+@keyframes sec-fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ========================================
+   SECTION HEADERS
+   ======================================== */
+.sec-section-header {
+    margin-bottom: var(--sec-space-xl);
+    text-align: center;
+}
+
+.sec-section-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--sec-space-xs);
+    padding: var(--sec-space-xs) var(--sec-space-md);
+    background: rgba(245, 158, 11, 0.15);
+    color: var(--sec-gold);
+    font-size: 0.75rem;
+    font-weight: 600;
+    border-radius: var(--sec-radius-full);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: var(--sec-space-md);
+}
+
+.sec-section-title {
+    font-size: clamp(1.5rem, 5vw, 2rem);
+    font-weight: 800;
+    margin: 0 0 var(--sec-space-sm) 0;
+    color: var(--sec-text);
+    line-height: 1.2;
+}
+
+.sec-section-subtitle {
+    font-size: 0.9375rem;
+    color: var(--sec-text-muted);
+    margin: 0;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* ========================================
+   CARDS
+   ======================================== */
+.sec-card {
+    background: var(--sec-bg-soft);
+    border: 1px solid var(--sec-border);
+    border-radius: var(--sec-radius-lg);
+    padding: var(--sec-space-lg);
+    margin-bottom: var(--sec-space-md);
+    transition: var(--sec-transition);
+}
+
+.sec-card:hover {
+    border-color: var(--sec-gold);
+    box-shadow: var(--sec-shadow);
+}
+
+.sec-card-header {
+    display: flex;
+    align-items: center;
+    gap: var(--sec-space-md);
+    margin-bottom: var(--sec-space-md);
+}
+
+.sec-card-icon {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--sec-bg-muted);
+    border-radius: var(--sec-radius);
+    font-size: 1.5rem;
+    flex-shrink: 0;
+}
+
+.sec-card-title {
+    font-size: 1.125rem;
+    font-weight: 700;
+    margin: 0;
+    color: var(--sec-text);
+}
+
+.sec-card-subtitle {
+    font-size: 0.8125rem;
+    color: var(--sec-text-muted);
+    margin: var(--sec-space-xs) 0 0 0;
+}
+
+.sec-card-body {
+    color: var(--sec-text-muted);
+    font-size: 0.9375rem;
+}
+
+/* Featured Card Variant */
+.sec-card.featured {
+    background: linear-gradient(135deg, rgba(245, 158, 11, 0.1) 0%, rgba(245, 158, 11, 0.05) 100%);
+    border-color: var(--sec-gold);
+}
+
+.sec-card.featured .sec-card-icon {
+    background: var(--sec-gradient-gold);
+    color: white;
+}
+
+/* Spirit Card Variant */
+.sec-card.spirit {
+    background: linear-gradient(135deg, rgba(139, 92, 246, 0.1) 0%, rgba(139, 92, 246, 0.05) 100%);
+    border-color: var(--sec-spirit);
+}
+
+.sec-card.spirit .sec-card-icon {
+    background: var(--sec-gradient-spirit);
+    color: white;
+}
+
+/* ========================================
+   BUTTONS
+   ======================================== */
+.sec-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--sec-space-sm);
+    padding: var(--sec-space-md) var(--sec-space-xl);
+    font-size: 0.9375rem;
+    font-weight: 600;
+    font-family: var(--sec-font-sans);
+    text-decoration: none;
+    border-radius: var(--sec-radius);
+    border: none;
+    cursor: pointer;
+    transition: var(--sec-transition);
+    min-height: 44px;
+}
+
+.sec-btn-primary {
+    background: var(--sec-gradient-gold);
+    color: #ffffff !important;
+    box-shadow: var(--sec-shadow);
+}
+
+.sec-btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--sec-shadow-lg), var(--sec-shadow-glow);
+}
+
+.sec-btn-primary:active {
+    transform: translateY(0);
+}
+
+.sec-btn-secondary {
+    background: transparent;
+    color: var(--sec-text) !important;
+    border: 2px solid var(--sec-border);
+}
+
+.sec-btn-secondary:hover {
+    border-color: var(--sec-gold);
+    color: var(--sec-gold) !important;
+    background: rgba(245, 158, 11, 0.1);
+}
+
+.sec-btn-ghost {
+    background: transparent;
+    color: var(--sec-text-muted) !important;
+    padding: var(--sec-space-sm);
+    min-height: auto;
+}
+
+.sec-btn-ghost:hover {
+    color: var(--sec-text) !important;
+    background: var(--sec-bg-muted);
+}
+
+.sec-btn-sm {
+    padding: var(--sec-space-sm) var(--sec-space-md);
+    font-size: 0.8125rem;
+    min-height: 36px;
+}
+
+.sec-btn-lg {
+    padding: var(--sec-space-lg) var(--sec-space-2xl);
+    font-size: 1rem;
+}
+
+.sec-btn-block {
+    width: 100%;
+}
+
+.sec-btn-icon {
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    border-radius: var(--sec-radius);
+}
+
+/* ========================================
+   QUICK ACTIONS GRID
+   ======================================== */
+.sec-actions-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--sec-space-sm);
+    margin-bottom: var(--sec-space-xl);
+}
+
+.sec-action-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 12px 8px;
+    background: var(--sec-bg-soft);
+    border: 1px solid var(--sec-border);
+    border-radius: var(--sec-radius-lg);
+    color: var(--sec-text);
+    font-size: 0.75rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: var(--sec-transition);
+    min-height: 70px;
+    text-align: center;
+    line-height: 1.3;
+    word-break: break-word;
+}
+
+.sec-action-btn:hover {
+    background: var(--sec-bg-muted);
+    border-color: var(--sec-gold);
+    transform: translateY(-2px);
+}
+
+.sec-action-btn:active {
+    transform: translateY(0);
+}
+
+.sec-action-icon {
+    font-size: 1.5rem;
+    line-height: 1.2;
+    height: auto;
+}
+
+.sec-action-label {
+    font-size: 0.75rem;
+    line-height: 1.2;
+}
+
+/* Mobile action buttons */
+@media (max-width: 480px) {
+    .sec-actions-grid {
+        gap: 8px;
+    }
+    
+    .sec-action-btn {
+        padding: 10px 6px;
+        min-height: 64px;
+        font-size: 0.6875rem;
+    }
+    
+    .sec-action-icon {
+        font-size: 1.25rem;
+    }
+}
+
+/* ========================================
+   STAT CARDS
+   ======================================== */
+.sec-stats-row {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--sec-space-md);
+    margin-bottom: var(--sec-space-xl);
+}
+
+.sec-stat-card {
+    background: var(--sec-bg-soft);
+    border: 1px solid var(--sec-border);
+    border-radius: var(--sec-radius-lg);
+    padding: var(--sec-space-lg);
+    text-align: center;
+}
+
+.sec-stat-value {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--sec-gold);
+    line-height: 1;
+    margin-bottom: var(--sec-space-xs);
+}
+
+.sec-stat-label {
+    font-size: 0.75rem;
+    color: var(--sec-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* ========================================
+   EMPTY STATE
+   ======================================== */
+.sec-empty-state {
+    text-align: center;
+    padding: var(--sec-space-3xl) var(--sec-space-lg);
+}
+
+.sec-empty-icon {
+    font-size: 4rem;
+    margin-bottom: var(--sec-space-lg);
+    opacity: 0.5;
+}
+
+.sec-empty-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--sec-text);
+    margin: 0 0 var(--sec-space-sm) 0;
+}
+
+.sec-empty-desc {
+    color: var(--sec-text-muted);
+    margin: 0 0 var(--sec-space-xl) 0;
+}
+
+/* ========================================
+   SCRIPTURE QUOTE
+   ======================================== */
+.sec-scripture {
+    background: linear-gradient(135deg, rgba(139, 92, 246, 0.1) 0%, rgba(139, 92, 246, 0.05) 100%);
+    border-left: 4px solid var(--sec-spirit);
+    border-radius: 0 var(--sec-radius-lg) var(--sec-radius-lg) 0;
+    padding: var(--sec-space-lg);
+    margin: var(--sec-space-xl) 0;
+}
+
+.sec-scripture-text {
+    font-family: var(--sec-font-serif);
+    font-size: 1.0625rem;
+    font-style: italic;
+    color: var(--sec-text);
+    margin: 0 0 var(--sec-space-md) 0;
+    line-height: 1.7;
+}
+
+.sec-scripture-ref {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--sec-spirit);
+    margin: 0;
+}
+
+/* ========================================
+   LIST ITEMS
+   ======================================== */
+.sec-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sec-list-item {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--sec-space-md);
+    padding: var(--sec-space-md) 0;
+    border-bottom: 1px solid var(--sec-border-light);
+}
+
+.sec-list-item:last-child {
+    border-bottom: none;
+}
+
+.sec-list-icon {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--sec-bg-muted);
+    border-radius: var(--sec-radius);
+    font-size: 1.25rem;
+    flex-shrink: 0;
+}
+
+.sec-list-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.sec-list-title {
+    font-weight: 600;
+    color: var(--sec-text);
+    margin: 0;
+}
+
+.sec-list-desc {
+    font-size: 0.8125rem;
+    color: var(--sec-text-muted);
+    margin: var(--sec-space-xs) 0 0 0;
+}
+
+/* ========================================
+   BADGES
+   ======================================== */
+.sec-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--sec-space-xs);
+    padding: var(--sec-space-xs) var(--sec-space-sm);
+    font-size: 0.6875rem;
+    font-weight: 600;
+    border-radius: var(--sec-radius-full);
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+
+.sec-badge-gold {
+    background: rgba(245, 158, 11, 0.15);
+    color: var(--sec-gold);
+}
+
+.sec-badge-spirit {
+    background: rgba(139, 92, 246, 0.15);
+    color: var(--sec-spirit);
+}
+
+.sec-badge-fire {
+    background: rgba(239, 68, 68, 0.15);
+    color: var(--sec-fire);
+}
+
+.sec-badge-hope {
+    background: rgba(34, 197, 94, 0.15);
+    color: var(--sec-hope);
+}
+
+.sec-badge-water {
+    background: rgba(59, 130, 246, 0.15);
+    color: var(--sec-water);
+}
+
+/* ========================================
+   DIVIDER
+   ======================================== */
+.sec-divider {
+    height: 1px;
+    background: var(--sec-border);
+    margin: var(--sec-space-xl) 0;
+}
+
+/* ========================================
+   LOADING SPINNER
+   ======================================== */
+.sec-spinner {
+    width: 24px;
+    height: 24px;
+    border: 3px solid var(--sec-border);
+    border-top-color: var(--sec-gold);
+    border-radius: 50%;
+    animation: sec-spin 0.8s linear infinite;
+}
+
+@keyframes sec-spin {
+    to { transform: rotate(360deg); }
+}
+
+/* ========================================
+   FLOATING ACTION BUTTON
+   ======================================== */
+.sec-fab {
+    position: fixed;
+    bottom: calc(var(--sec-space-xl) + 60px);
+    right: var(--sec-space-lg);
+    width: 56px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--sec-gradient-gold);
+    border: none;
+    border-radius: 50%;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    box-shadow: var(--sec-shadow-lg), var(--sec-shadow-glow);
+    transition: var(--sec-transition-spring);
+    z-index: 100;
+}
+
+.sec-fab:hover {
+    transform: scale(1.1);
+}
+
+.sec-fab:active {
+    transform: scale(0.95);
+}
+
+/* ========================================
+   FOOTER
+   ======================================== */
+.sec-footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--sec-space-md);
+    background: var(--sec-bg-soft);
+    border-top: 1px solid var(--sec-border);
+    flex: 0 0 auto;
+    min-height: 44px;
+    z-index: 10;
+}
+
+.sec-footer-text {
+    font-size: 0.75rem;
+    color: var(--sec-text-dim);
+}
+
+.sec-footer-text a {
+    color: var(--sec-gold);
+    text-decoration: none;
+}
+
+/* ========================================
+   RESPONSIVE ADJUSTMENTS
+   ======================================== */
+@media (max-width: 480px) {
+    .sec-content {
+        padding: var(--sec-space-md);
+    }
+    
+    .sec-header {
+        padding: var(--sec-space-sm) var(--sec-space-md);
+    }
+    
+    .sec-header h1 {
+        font-size: 1rem;
+    }
+    
+    .sec-card {
+        padding: var(--sec-space-md);
+    }
+    
+    .sec-actions-grid {
+        gap: var(--sec-space-sm);
+    }
+    
+    .sec-action-btn {
+        padding: var(--sec-space-md);
+    }
+    
+    .sec-stat-value {
+        font-size: 1.5rem;
+    }
+    
+    .sec-fab {
+        bottom: calc(var(--sec-space-lg) + 70px);
+        right: var(--sec-space-md);
+        width: 52px;
+        height: 52px;
+    }
+}
+
+/* Tablet and up */
+@media (min-width: 768px) {
+    .sec-actions-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+    
+    .sec-stats-row {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+/* ========================================
+   ANIMATION UTILITIES
+   ======================================== */
+.sec-animate-in {
+    animation: sec-fadeIn 0.3s ease forwards;
+}
+
+.sec-animate-bounce {
+    animation: sec-bounce 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes sec-bounce {
+    0% { transform: scale(0.8); opacity: 0; }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+.sec-animate-slide-up {
+    animation: sec-slideUp 0.3s ease forwards;
+}
+
+@keyframes sec-slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Staggered animation delays */
+.sec-stagger-1 { animation-delay: 0.05s; }
+.sec-stagger-2 { animation-delay: 0.1s; }
+.sec-stagger-3 { animation-delay: 0.15s; }
+.sec-stagger-4 { animation-delay: 0.2s; }
+.sec-stagger-5 { animation-delay: 0.25s; }
+
+/* ========================================
+   TIMELINE COMPONENTS - Phase 2
+   ======================================== */
+
+/* Timeline Filter Bar */
+.sec-timeline-filters {
+    display: flex;
+    gap: 8px;
+    padding: 12px 0;
+    margin-bottom: 16px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.sec-timeline-filters::-webkit-scrollbar {
+    display: none;
+}
+
+.sec-filter-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    background: var(--sec-bg-soft);
+    border: 1px solid var(--sec-border);
+    border-radius: 20px;
+    color: var(--sec-text-muted);
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: var(--sec-transition);
+    white-space: nowrap;
+    min-height: 36px;
+}
+
+.sec-filter-btn:hover {
+    border-color: var(--sec-gold);
+    color: var(--sec-text);
+}
+
+.sec-filter-btn.active {
+    background: var(--sec-gradient-gold);
+    border-color: var(--sec-gold);
+    color: var(--sec-bg);
+}
+
+.sec-filter-btn .sec-filter-icon {
+    font-size: 14px;
+    line-height: 1;
+}
+
+/* Timeline Container */
+.sec-timeline {
+    position: relative;
+    padding-left: 24px;
+}
+
+/* Timeline Vertical Line */
+.sec-timeline::before {
+    content: '';
+    position: absolute;
+    left: 8px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(
+        180deg,
+        var(--sec-gold) 0%,
+        var(--sec-spirit) 25%,
+        var(--sec-fire) 50%,
+        var(--sec-hope) 75%,
+        var(--sec-water) 100%
+    );
+    border-radius: 2px;
+}
+
+/* Era Section */
+.sec-era {
+    position: relative;
+    margin-bottom: 24px;
+}
+
+/* Era Header (Expandable) */
+.sec-era-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    background: var(--sec-bg-soft);
+    border: 1px solid var(--sec-border);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: var(--sec-transition);
+    position: relative;
+}
+
+.sec-era-header::before {
+    content: '';
+    position: absolute;
+    left: -20px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 12px;
+    height: 12px;
+    background: var(--sec-bg);
+    border: 3px solid var(--sec-gold);
+    border-radius: 50%;
+    z-index: 1;
+}
+
+.sec-era-header:hover {
+    border-color: var(--sec-gold);
+    background: var(--sec-bg-muted);
+}
+
+.sec-era-header.expanded {
+    border-color: var(--sec-gold);
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.sec-era-icon {
+    font-size: 24px;
+    line-height: 1;
+    flex-shrink: 0;
+}
+
+.sec-era-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.sec-era-name {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--sec-text);
+    margin: 0 0 2px 0;
+    line-height: 1.3;
+}
+
+.sec-era-period {
+    font-size: 12px;
+    color: var(--sec-text-muted);
+    line-height: 1.3;
+}
+
+.sec-era-toggle {
+    font-size: 16px;
+    color: var(--sec-text-muted);
+    transition: var(--sec-transition);
+    flex-shrink: 0;
+}
+
+.sec-era-header.expanded .sec-era-toggle {
+    transform: rotate(180deg);
+}
+
+/* Era Content (Events List) */
+.sec-era-content {
+    display: none;
+    background: var(--sec-bg-soft);
+    border: 1px solid var(--sec-border);
+    border-top: none;
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
+    padding: 8px;
+    margin-left: 0;
+}
+
+.sec-era-content.expanded {
+    display: block;
+    animation: sec-slideDown 0.3s ease;
+}
+
+@keyframes sec-slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Era Description */
+.sec-era-desc {
+    font-size: 13px;
+    color: var(--sec-text-muted);
+    padding: 8px 12px;
+    margin-bottom: 8px;
+    font-style: italic;
+    border-left: 3px solid var(--sec-gold);
+    background: var(--sec-bg);
+    border-radius: 0 8px 8px 0;
+}
+
+/* Timeline Event Card */
+.sec-event {
+    padding: 12px;
+    background: var(--sec-bg);
+    border-radius: 8px;
+    margin-bottom: 8px;
+    border-left: 3px solid var(--sec-border);
+    transition: var(--sec-transition);
+}
+
+.sec-event:last-child {
+    margin-bottom: 0;
+}
+
+.sec-event:hover {
+    background: var(--sec-bg-muted);
+}
+
+.sec-event.major {
+    border-left-color: var(--sec-gold);
+}
+
+.sec-event.notable {
+    border-left-color: var(--sec-spirit);
+}
+
+.sec-event-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 6px;
+}
+
+.sec-event-year {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--sec-gold);
+    background: rgba(245, 158, 11, 0.15);
+    padding: 2px 8px;
+    border-radius: 10px;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.sec-event-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--sec-text);
+    margin: 0;
+    line-height: 1.4;
+}
+
+.sec-event-desc {
+    font-size: 13px;
+    color: var(--sec-text-muted);
+    line-height: 1.5;
+    margin: 0 0 8px 0;
+}
+
+.sec-event-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.sec-event-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 10px;
+    background: var(--sec-bg-muted);
+    color: var(--sec-text-dim);
+}
+
+.sec-event-tag.scripture {
+    background: rgba(139, 92, 246, 0.15);
+    color: var(--sec-spirit-light);
+}
+
+.sec-event-tag.figure {
+    background: rgba(59, 130, 246, 0.15);
+    color: var(--sec-water);
+}
+
+/* Category Badges */
+.sec-category-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 10px;
+    font-weight: 600;
+    padding: 2px 6px;
+    border-radius: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.sec-category-badge.apostolic {
+    background: rgba(139, 92, 246, 0.2);
+    color: var(--sec-spirit-light);
+}
+
+.sec-category-badge.cooljc {
+    background: rgba(245, 158, 11, 0.2);
+    color: var(--sec-gold-light);
+}
+
+/* Timeline Stats */
+.sec-timeline-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin-bottom: 16px;
+}
+
+.sec-timeline-stat {
+    text-align: center;
+    padding: 12px 8px;
+    background: var(--sec-bg-soft);
+    border-radius: 8px;
+    border: 1px solid var(--sec-border);
+}
+
+.sec-timeline-stat-value {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--sec-gold);
+    line-height: 1;
+    margin-bottom: 4px;
+}
+
+.sec-timeline-stat-label {
+    font-size: 10px;
+    color: var(--sec-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Mobile Timeline Adjustments */
+@media (max-width: 480px) {
+    .sec-timeline {
+        padding-left: 20px;
+    }
+    
+    .sec-timeline::before {
+        left: 6px;
+    }
+    
+    .sec-era-header::before {
+        left: -16px;
+        width: 10px;
+        height: 10px;
+        border-width: 2px;
+    }
+    
+    .sec-era-header {
+        padding: 10px 12px;
+        gap: 10px;
+    }
+    
+    .sec-era-icon {
+        font-size: 20px;
+    }
+    
+    .sec-era-name {
+        font-size: 14px;
+    }
+    
+    .sec-era-period {
+        font-size: 11px;
+    }
+    
+    .sec-event {
+        padding: 10px;
+    }
+    
+    .sec-event-title {
+        font-size: 13px;
+    }
+    
+    .sec-event-desc {
+        font-size: 12px;
+    }
+    
+    .sec-filter-btn {
+        padding: 6px 12px;
+        font-size: 12px;
+        min-height: 32px;
+    }
+    
+    .sec-timeline-stats {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+    .sec-timeline-stat-value {
+        font-size: 18px;
+    }
+    
+    .sec-timeline-stat-label {
+        font-size: 9px;
+    }
+}
+
+/* ========================================
+   MINISTRY TOOLKIT COMPONENTS - Phase 3
+   ======================================== */
+
+/* Ministry Stats Row */
+.sec-ministry-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    margin-bottom: 16px;
+}
+
+.sec-ministry-stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px 6px;
+    background: var(--sec-bg-soft);
+    border-radius: 10px;
+    border: 1px solid var(--sec-border);
+}
+
+.sec-ministry-stat-icon {
+    font-size: 16px;
+    line-height: 1;
+    margin-bottom: 4px;
+}
+
+.sec-ministry-stat-value {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--sec-gold);
+    line-height: 1;
+}
+
+.sec-ministry-stat-label {
+    font-size: 9px;
+    color: var(--sec-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-top: 2px;
+}
+
+/* Ministry Sub-Navigation */
+.sec-ministry-nav {
+    display: flex;
+    gap: 4px;
+    padding: 8px;
+    background: var(--sec-bg-soft);
+    border-radius: 12px;
+    margin-bottom: 16px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    min-height: 60px;
+}
+
+.sec-ministry-nav::-webkit-scrollbar {
+    display: none;
+}
+
+.sec-ministry-nav-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    padding: 8px 12px;
+    background: transparent;
+    border: none;
+    border-radius: 8px;
+    color: var(--sec-text-muted);
+    cursor: pointer;
+    transition: var(--sec-transition);
+    flex: 1;
+    min-width: 56px;
+    min-height: 44px;
+}
+
+.sec-ministry-nav-btn:hover {
+    background: var(--sec-bg-muted);
+    color: var(--sec-text);
+}
+
+.sec-ministry-nav-btn.active {
+    background: var(--sec-gradient-gold);
+    color: var(--sec-bg);
+}
+
+.sec-ministry-nav-icon {
+    font-size: 20px;
+    line-height: 1;
+    display: block;
+}
+
+.sec-ministry-nav-label {
+    font-size: 11px;
+    line-height: 1;
+    white-space: nowrap;
+    display: block;
+}
+
+/* Quick Ministry Actions */
+.sec-quick-ministry-actions {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+    margin-bottom: 16px;
+}
+
+/* Subsection Headers */
+.sec-subsection-header {
+    margin-bottom: 12px;
+}
+
+.sec-subsection-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--sec-text);
+    margin: 0 0 2px 0;
+}
+
+.sec-subsection-subtitle {
+    font-size: 12px;
+    color: var(--sec-text-muted);
+    margin: 0;
+}
+
+/* Featured Quote */
+.sec-featured-quote {
+    font-size: 14px;
+    font-style: italic;
+    color: var(--sec-text);
+    padding: 12px;
+    background: var(--sec-bg);
+    border-left: 3px solid var(--sec-gold);
+    border-radius: 0 8px 8px 0;
+    margin: 0 0 12px 0;
+}
+
+/* Scripture Tags */
+.sec-scripture-tag {
+    display: inline-block;
+    font-size: 11px;
+    padding: 3px 8px;
+    background: rgba(139, 92, 246, 0.15);
+    color: var(--sec-spirit-light);
+    border-radius: 12px;
+    margin: 2px 4px 2px 0;
+}
+
+.sec-scripture-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-top: 8px;
+}
+
+/* Prayer Text Styling */
+.sec-prayer-text {
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--sec-text);
+    margin: 0 0 12px 0;
+}
+
+.sec-prayer-scriptures {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+}
+
+/* ========================================
+   CONVERSATION SCRIPTS
+   ======================================== */
+.sec-scripts-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.sec-script-card {
+    background: var(--sec-bg-soft);
+    border: 1px solid var(--sec-border);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: var(--sec-transition);
+}
+
+.sec-script-card.expanded {
+    border-color: var(--sec-gold);
+}
+
+.sec-script-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px;
+    cursor: pointer;
+    transition: var(--sec-transition);
+}
+
+.sec-script-header:hover {
+    background: var(--sec-bg-muted);
+}
+
+.sec-script-icon {
+    font-size: 24px;
+    line-height: 1;
+    flex-shrink: 0;
+}
+
+.sec-script-title-area {
+    flex: 1;
+    min-width: 0;
+}
+
+.sec-script-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--sec-text);
+    margin: 0 0 2px 0;
+}
+
+.sec-script-scenario {
+    font-size: 11px;
+    color: var(--sec-text-muted);
+    margin: 0;
+}
+
+.sec-script-toggle {
+    font-size: 12px;
+    color: var(--sec-text-muted);
+    flex-shrink: 0;
+}
+
+.sec-script-content {
+    padding: 0 12px 12px;
+    border-top: 1px solid var(--sec-border);
+    animation: sec-slideDown 0.3s ease;
+}
+
+.sec-script-section {
+    padding: 12px 0;
+    border-bottom: 1px solid var(--sec-border-light);
+}
+
+.sec-script-section:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.sec-script-section h5 {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--sec-gold);
+    margin: 0 0 8px 0;
+}
+
+.sec-script-quote {
+    font-size: 13px;
+    font-style: italic;
+    color: var(--sec-text);
+    padding: 10px;
+    background: var(--sec-bg);
+    border-radius: 8px;
+    margin: 0;
+}
+
+.sec-script-points {
+    margin: 0;
+    padding-left: 20px;
+}
+
+.sec-script-points li {
+    font-size: 13px;
+    color: var(--sec-text-muted);
+    margin-bottom: 6px;
+    line-height: 1.4;
+}
+
+.sec-script-points li:last-child {
+    margin-bottom: 0;
+}
+
+/* ========================================
+   COMMON QUESTIONS (Q&A)
+   ======================================== */
+.sec-questions-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.sec-qa-card {
+    background: var(--sec-bg-soft);
+    border: 1px solid var(--sec-border);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: var(--sec-transition);
+}
+
+.sec-qa-card.expanded {
+    border-color: var(--sec-spirit);
+}
+
+.sec-qa-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 12px;
+    cursor: pointer;
+    transition: var(--sec-transition);
+}
+
+.sec-qa-header:hover {
+    background: var(--sec-bg-muted);
+}
+
+.sec-qa-icon {
+    font-size: 18px;
+    line-height: 1;
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.sec-qa-question {
+    flex: 1;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--sec-text);
+    margin: 0;
+    line-height: 1.3;
+}
+
+.sec-qa-toggle {
+    font-size: 12px;
+    color: var(--sec-text-muted);
+    flex-shrink: 0;
+}
+
+.sec-qa-short {
+    padding: 0 12px 12px;
+}
+
+.sec-qa-short p {
+    font-size: 13px;
+    color: var(--sec-text-muted);
+    margin: 0;
+    line-height: 1.5;
+}
+
+.sec-qa-full {
+    padding: 12px;
+    background: var(--sec-bg);
+    border-top: 1px solid var(--sec-border);
+    animation: sec-slideDown 0.3s ease;
+}
+
+.sec-qa-full-text {
+    font-size: 13px;
+    color: var(--sec-text);
+    line-height: 1.6;
+    margin: 0 0 12px 0;
+}
+
+.sec-qa-scriptures h5 {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--sec-spirit);
+    margin: 0 0 6px 0;
+}
+
+/* ========================================
+   PRAYER TEMPLATES
+   ======================================== */
+.sec-prayers-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+}
+
+.sec-prayer-card {
+    background: var(--sec-bg-soft);
+    border: 1px solid var(--sec-border);
+    border-radius: 12px;
+    padding: 12px;
+    cursor: pointer;
+    transition: var(--sec-transition);
+}
+
+.sec-prayer-card:hover {
+    border-color: var(--sec-gold);
+    background: var(--sec-bg-muted);
+}
+
+.sec-prayer-card.expanded {
+    grid-column: 1 / -1;
+    border-color: var(--sec-gold);
+}
+
+.sec-prayer-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.sec-prayer-icon {
+    font-size: 24px;
+    line-height: 1;
+}
+
+.sec-prayer-title-area {
+    flex: 1;
+}
+
+.sec-prayer-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--sec-text);
+    margin: 0;
+}
+
+.sec-prayer-situation {
+    font-size: 11px;
+    color: var(--sec-text-muted);
+    margin: 0;
+}
+
+.sec-prayer-content {
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid var(--sec-border);
+    animation: sec-slideDown 0.3s ease;
+}
+
+/* ========================================
+   ENCOUNTER LOG FORM
+   ======================================== */
+.sec-encounter-form {
+    background: var(--sec-bg-soft);
+    border: 1px solid var(--sec-border);
+    border-radius: 12px;
+    padding: 16px;
+}
+
+.sec-form-group {
+    margin-bottom: 14px;
+}
+
+.sec-form-group:last-of-type {
+    margin-bottom: 16px;
+}
+
+.sec-form-label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--sec-text);
+    margin-bottom: 6px;
+}
+
+.sec-form-input,
+.sec-form-select,
+.sec-form-textarea {
+    width: 100%;
+    padding: 12px 14px;
+    min-height: 44px;
+    background: var(--sec-bg);
+    border: 1px solid var(--sec-border);
+    border-radius: 8px;
+    color: var(--sec-text);
+    font-size: 15px;
+    font-family: inherit;
+    transition: var(--sec-transition);
+    box-sizing: border-box;
+}
+
+.sec-form-input:focus,
+.sec-form-select:focus,
+.sec-form-textarea:focus {
+    outline: none;
+    border-color: var(--sec-gold);
+    box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.15);
+}
+
+.sec-form-input::placeholder,
+.sec-form-textarea::placeholder {
+    color: var(--sec-text-dim);
+}
+
+.sec-form-textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+.sec-form-select {
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2394a3b8' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    padding-right: 36px;
+}
+
+.sec-form-checkbox-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 44px;
+}
+
+.sec-form-checkbox {
+    width: 20px;
+    height: 20px;
+    accent-color: var(--sec-gold);
+    cursor: pointer;
+}
+
+.sec-form-checkbox-label {
+    font-size: 14px;
+    color: var(--sec-text);
+    cursor: pointer;
+}
+
+/* Encounters List */
+.sec-encounters-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.sec-encounter-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 12px;
+    background: var(--sec-bg-soft);
+    border: 1px solid var(--sec-border);
+    border-radius: 10px;
+}
+
+.sec-encounter-icon {
+    font-size: 20px;
+    line-height: 1;
+    flex-shrink: 0;
+}
+
+.sec-encounter-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.sec-encounter-location {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--sec-text);
+    margin: 0 0 2px 0;
+}
+
+.sec-encounter-desc {
+    font-size: 12px;
+    color: var(--sec-text-muted);
+    margin: 0;
+    line-height: 1.4;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+.sec-encounter-date {
+    font-size: 11px;
+    color: var(--sec-text-dim);
+    flex-shrink: 0;
+}
+
+/* Mobile Adjustments for Ministry */
+@media (max-width: 480px) {
+    .sec-ministry-stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .sec-ministry-nav {
+        min-height: 54px;
+    }
+    
+    .sec-ministry-nav-btn {
+        padding: 6px 8px;
+        min-width: 48px;
+        min-height: 40px;
+    }
+    
+    .sec-ministry-nav-icon {
+        font-size: 18px;
+    }
+    
+    .sec-ministry-nav-label {
+        font-size: 9px;
+    }
+    
+    .sec-prayers-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .sec-script-icon {
+        font-size: 20px;
+    }
+    
+    .sec-script-title {
+        font-size: 13px;
+    }
+    
+    .sec-qa-question {
+        font-size: 13px;
+    }
+}
+
+/* ==========================================
+   DOCTRINE TAB - Phase 4
+   ========================================== */
+
+/* Doctrine Navigation */
+.sec-doctrine-nav {
+    display: flex;
+    gap: 4px;
+    padding: 4px;
+    background: var(--sec-bg-soft);
+    border-radius: 12px;
+    margin-bottom: 16px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.sec-doctrine-nav-btn {
+    flex: 1;
+    min-width: 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    padding: 10px 8px;
+    min-height: 44px;
+    background: transparent;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: var(--sec-transition);
+}
+
+.sec-doctrine-nav-btn:hover {
+    background: rgba(239, 68, 68, 0.1);
+}
+
+.sec-doctrine-nav-btn.active {
+    background: linear-gradient(135deg, var(--sec-fire) 0%, #dc2626 100%);
+    box-shadow: 0 2px 8px rgba(239, 68, 68, 0.3);
+}
+
+.sec-doctrine-nav-icon {
+    font-size: 18px;
+    display: block;
+    line-height: 1;
+}
+
+.sec-doctrine-nav-btn.active .sec-doctrine-nav-icon {
+    transform: scale(1.1);
+}
+
+.sec-doctrine-nav-label {
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--sec-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    display: block;
+    line-height: 1;
+}
+
+.sec-doctrine-nav-btn.active .sec-doctrine-nav-label {
+    color: #fff;
+}
+
+/* Doctrine Quick Reference */
+.sec-doctrine-quick-ref {
+    margin-bottom: 20px;
+}
+
+.sec-belief-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 14px;
+    background: var(--sec-bg-soft);
+    border: 1px solid var(--sec-border);
+    border-radius: 12px;
+    margin-bottom: 10px;
+    transition: var(--sec-transition);
+}
+
+.sec-belief-card:hover {
+    border-color: var(--sec-fire);
+}
+
+.sec-belief-icon {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    font-size: 20px;
+    flex-shrink: 0;
+}
+
+.sec-belief-text {
+    flex: 1;
+    min-width: 0;
+}
+
+.sec-belief-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--sec-text);
+    margin: 0 0 4px 0;
+}
+
+.sec-belief-desc {
+    font-size: 13px;
+    color: var(--sec-text-muted);
+    margin: 0;
+    line-height: 1.4;
+}
+
+/* Doctrine Navigation Cards */
+.sec-doctrine-nav-cards {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.sec-doctrine-nav-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 16px 12px;
+    background: var(--sec-bg-soft);
+    border: 1px solid var(--sec-border);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: var(--sec-transition);
+}
+
+.sec-doctrine-nav-card:hover {
+    border-color: var(--sec-fire);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.15);
+}
+
+.sec-doctrine-nav-card-icon {
+    font-size: 28px;
+    margin-bottom: 8px;
+    display: block;
+    line-height: 1;
+}
+
+.sec-doctrine-nav-card-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--sec-text);
+    margin: 0 0 4px 0;
+}
+
+.sec-doctrine-nav-card-desc {
+    font-size: 11px;
+    color: var(--sec-text-dim);
+    margin: 0;
+}
+
+/* Key Scripture */
+.sec-key-scripture {
+    background: linear-gradient(135deg, rgba(239, 68, 68, 0.1) 0%, rgba(239, 68, 68, 0.05) 100%);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    border-radius: 12px;
+    padding: 16px;
+    text-align: center;
+}
+
+.sec-scripture-text {
+    font-size: 14px;
+    font-style: italic;
+    color: var(--sec-text);
+    line-height: 1.6;
+    margin: 0 0 8px 0;
+}
+
+.sec-scripture-ref {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--sec-fire);
+    margin: 0;
+}
+
+/* Doctrine Cards */
+.sec-doctrine-card {
+    background: var(--sec-bg-soft);
+    border: 1px solid var(--sec-border);
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 16px;
+}
+
+.sec-doctrine-card-header {
+    padding: 12px 16px;
+    background: var(--sec-bg-muted);
+    border-bottom: 1px solid var(--sec-border);
+}
+
+.sec-doctrine-card-header h4 {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--sec-text);
+    margin: 0;
+}
+
+.sec-doctrine-card-body {
+    padding: 16px;
+}
+
+.sec-doctrine-card-body > p {
+    font-size: 14px;
+    color: var(--sec-text-muted);
+    line-height: 1.6;
+    margin: 0 0 12px 0;
+}
+
+/* Scripture List */
+.sec-scripture-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 12px;
+}
+
+.sec-scripture-item {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: 10px 12px;
+    background: var(--sec-bg);
+    border-radius: 8px;
+    border-left: 3px solid var(--sec-fire);
+}
+
+.sec-scripture-ref-inline {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--sec-fire);
+}
+
+.sec-scripture-text-inline {
+    font-size: 13px;
+    font-style: italic;
+    color: var(--sec-text-muted);
+    line-height: 1.4;
+}
+
+/* Comparison Table */
+.sec-comparison-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+}
+
+.sec-comparison-table th {
+    padding: 10px 8px;
+    background: var(--sec-bg);
+    color: var(--sec-text);
+    font-weight: 700;
+    text-align: left;
+    border-bottom: 2px solid var(--sec-border);
+}
+
+.sec-comparison-table td {
+    padding: 10px 8px;
+    border-bottom: 1px solid var(--sec-border);
+    color: var(--sec-text-muted);
+    vertical-align: top;
+}
+
+.sec-table-topic {
+    font-weight: 600;
+    color: var(--sec-text) !important;
+}
+
+.sec-table-oneness {
+    background: rgba(34, 197, 94, 0.05);
+    color: var(--sec-hope) !important;
+}
+
+.sec-table-trinity {
+    background: rgba(100, 116, 139, 0.05);
+}
+
+/* Featured Scripture */
+.sec-featured-scripture {
+    background: linear-gradient(135deg, rgba(239, 68, 68, 0.12) 0%, rgba(239, 68, 68, 0.04) 100%);
+    border: 1px solid rgba(239, 68, 68, 0.25);
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.sec-featured-text {
+    font-size: 15px;
+    font-style: italic;
+    color: var(--sec-text);
+    line-height: 1.6;
+    margin: 0 0 10px 0;
+}
+
+.sec-featured-ref {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--sec-fire);
+    margin: 0;
+}
+
+/* Salvation Steps */
+.sec-salvation-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.sec-step-card {
+    display: flex;
+    gap: 14px;
+    padding: 16px;
+    background: var(--sec-bg-soft);
+    border: 1px solid var(--sec-border);
+    border-radius: 12px;
+    transition: var(--sec-transition);
+}
+
+.sec-step-card:hover {
+    border-color: var(--sec-gold);
+}
+
+.sec-step-num {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-size: 18px;
+    font-weight: 800;
+    color: #fff;
+    flex-shrink: 0;
+}
+
+.sec-step-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.sec-step-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+.sec-step-icon {
+    font-size: 18px;
+}
+
+.sec-step-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--sec-text);
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.sec-step-desc {
+    font-size: 13px;
+    color: var(--sec-text-muted);
+    line-height: 1.5;
+    margin: 0 0 12px 0;
+}
+
+.sec-step-scriptures {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.sec-step-scriptures .sec-scripture-item {
+    padding: 8px 10px;
+}
+
+/* Reasons List */
+.sec-reasons-list {
+    margin: 0;
+    padding-left: 20px;
+}
+
+.sec-reasons-list li {
+    font-size: 13px;
+    color: var(--sec-text-muted);
+    line-height: 1.5;
+    margin-bottom: 8px;
+    position: relative;
+}
+
+.sec-reasons-list li::marker {
+    color: var(--sec-hope);
+}
+
+/* Holiness Areas */
+.sec-holiness-area {
+    background: var(--sec-bg-soft);
+    border: 1px solid var(--sec-border);
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 12px;
+}
+
+.sec-holiness-area-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.sec-holiness-icon {
+    font-size: 22px;
+}
+
+.sec-holiness-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--sec-text);
+    margin: 0;
+}
+
+.sec-holiness-content {
+    padding-left: 32px;
+}
+
+.sec-holiness-points {
+    margin: 0 0 10px 0;
+    padding-left: 18px;
+}
+
+.sec-holiness-points li {
+    font-size: 13px;
+    color: var(--sec-text-muted);
+    line-height: 1.5;
+    margin-bottom: 4px;
+}
+
+.sec-holiness-refs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.sec-ref-tag {
+    display: inline-block;
+    padding: 3px 8px;
+    background: rgba(59, 130, 246, 0.15);
+    border: 1px solid rgba(59, 130, 246, 0.3);
+    border-radius: 12px;
+    font-size: 11px;
+    color: var(--sec-faith);
+    font-weight: 500;
+}
+
+/* Apologetics */
+.sec-apologetics-card {
+    background: var(--sec-bg-soft);
+    border: 1px solid var(--sec-border);
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 14px;
+}
+
+.sec-apologetics-question {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 14px 16px;
+    background: var(--sec-bg-muted);
+    border-bottom: 1px solid var(--sec-border);
+}
+
+.sec-question-icon {
+    font-size: 18px;
+    flex-shrink: 0;
+    line-height: 1;
+}
+
+.sec-question-text {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--sec-text);
+    margin: 0;
+    line-height: 1.4;
+}
+
+.sec-apologetics-answer {
+    padding: 16px;
+}
+
+.sec-apologetics-answer > p {
+    font-size: 13px;
+    color: var(--sec-text-muted);
+    line-height: 1.6;
+    margin: 0 0 12px 0;
+}
+
+.sec-apologetics-refs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+/* Tips List */
+.sec-tips-list {
+    margin: 0;
+    padding-left: 20px;
+}
+
+.sec-tips-list li {
+    font-size: 13px;
+    color: var(--sec-text-muted);
+    line-height: 1.5;
+    margin-bottom: 8px;
+}
+
+.sec-tips-list li::marker {
+    color: var(--sec-gold);
+}
+
+/* Mobile Adjustments for Doctrine */
+@media (max-width: 480px) {
+    .sec-doctrine-nav-btn {
+        min-width: 50px;
+        padding: 8px 4px;
+    }
+    
+    .sec-doctrine-nav-icon {
+        font-size: 16px;
+    }
+    
+    .sec-doctrine-nav-label {
+        font-size: 9px;
+    }
+    
+    .sec-doctrine-nav-cards {
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+    }
+    
+    .sec-doctrine-nav-card {
+        padding: 12px 8px;
+    }
+    
+    .sec-doctrine-nav-card-icon {
+        font-size: 24px;
+    }
+    
+    .sec-belief-icon {
+        width: 36px;
+        height: 36px;
+        font-size: 18px;
+    }
+    
+    .sec-step-card {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .sec-step-num {
+        width: 32px;
+        height: 32px;
+        font-size: 16px;
+    }
+    
+    .sec-comparison-table {
+        font-size: 11px;
+    }
+    
+    .sec-comparison-table th,
+    .sec-comparison-table td {
+        padding: 8px 6px;
+    }
+    
+    .sec-holiness-content {
+        padding-left: 0;
+    }
+    
+    .sec-featured-text {
+        font-size: 14px;
+    }
+}
+
+/* ==========================================
+   JOURNAL TAB - Phase 5
+   ========================================== */
+
+/* Journal Stats */
+.sec-journal-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    margin-bottom: 16px;
+}
+
+.sec-journal-stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 12px 8px;
+    background: var(--sec-bg-soft);
+    border: 1px solid var(--sec-border);
+    border-radius: 10px;
+    text-align: center;
+    transition: var(--sec-transition);
+}
+
+.sec-journal-stat:hover {
+    border-color: var(--sec-gold);
+    background: linear-gradient(135deg, rgba(245, 158, 11, 0.08) 0%, rgba(245, 158, 11, 0.02) 100%);
+}
+
+.sec-journal-stat-icon {
+    font-size: 20px;
+    margin-bottom: 4px;
+    display: block;
+    line-height: 1;
+}
+
+.sec-journal-stat-value {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--sec-gold);
+    line-height: 1.2;
+}
+
+.sec-journal-stat-label {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    color: var(--sec-text-dim);
+    font-weight: 600;
+}
+
+/* Journal Navigation */
+.sec-journal-nav {
+    display: flex;
+    gap: 4px;
+    padding: 4px;
+    background: var(--sec-bg-soft);
+    border-radius: 12px;
+    margin-bottom: 16px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.sec-journal-nav-btn {
+    flex: 1;
+    min-width: 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    padding: 10px 8px;
+    min-height: 44px;
+    background: transparent;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: var(--sec-transition);
+}
+
+.sec-journal-nav-btn:hover {
+    background: rgba(245, 158, 11, 0.1);
+}
+
+.sec-journal-nav-btn.active {
+    background: linear-gradient(135deg, var(--sec-gold) 0%, #f59e0b 100%);
+    box-shadow: 0 2px 8px rgba(245, 158, 11, 0.3);
+}
+
+.sec-journal-nav-icon {
+    font-size: 18px;
+    display: block;
+    line-height: 1;
+}
+
+.sec-journal-nav-btn.active .sec-journal-nav-icon {
+    transform: scale(1.1);
+}
+
+.sec-journal-nav-label {
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--sec-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    display: block;
+    line-height: 1;
+}
+
+.sec-journal-nav-btn.active .sec-journal-nav-label {
+    color: #000;
+}
+
+/* Daily Prompt */
+.sec-daily-prompt {
+    font-size: 16px;
+    font-style: italic;
+    color: var(--sec-text);
+    line-height: 1.5;
+    margin-bottom: 16px;
+    padding: 16px;
+    background: var(--sec-bg);
+    border-radius: 8px;
+    border-left: 3px solid var(--sec-gold);
+}
+
+/* Quick Actions */
+.sec-journal-quick-actions {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+/* Recent Entries */
+.sec-recent-entries {
+    margin-bottom: 20px;
+}
+
+.sec-entry-preview {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+    background: var(--sec-bg-soft);
+    border: 1px solid var(--sec-border);
+    border-radius: 10px;
+    margin-bottom: 8px;
+    cursor: pointer;
+    transition: var(--sec-transition);
+}
+
+.sec-entry-preview:hover {
+    border-color: var(--sec-gold);
+    transform: translateY(-1px);
+}
+
+.sec-entry-type-icon {
+    font-size: 24px;
+    flex-shrink: 0;
+    display: block;
+    line-height: 1;
+}
+
+.sec-entry-preview-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.sec-entry-preview-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--sec-text);
+    margin: 0 0 4px 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.sec-entry-preview-meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    color: var(--sec-text-dim);
+}
+
+.sec-mood-tag {
+    font-size: 14px;
+}
+
+/* Active Prayers Section */
+.sec-active-prayers {
+    background: var(--sec-bg-soft);
+    border: 1px solid var(--sec-border);
+    border-radius: 12px;
+    padding: 16px;
+}
+
+.sec-prayer-preview {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--sec-border);
+}
+
+.sec-prayer-preview:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.sec-prayer-preview-icon {
+    font-size: 16px;
+    flex-shrink: 0;
+}
+
+.sec-prayer-preview-text {
+    font-size: 13px;
+    color: var(--sec-text-muted);
+    margin: 0;
+    line-height: 1.4;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+/* Journal Form */
+.sec-journal-form {
+    background: var(--sec-bg-soft);
+    border: 1px solid var(--sec-border);
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 20px;
+}
+
+.sec-journal-textarea {
+    min-height: 120px;
+}
+
+/* Mood Picker */
+.sec-mood-picker {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.sec-mood-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    background: var(--sec-bg);
+    border: 2px solid var(--sec-border);
+    border-radius: 10px;
+    font-size: 20px;
+    cursor: pointer;
+    transition: var(--sec-transition);
+}
+
+.sec-mood-btn:hover {
+    border-color: var(--sec-gold);
+    transform: scale(1.05);
+}
+
+.sec-mood-btn.selected {
+    border-color: var(--sec-gold);
+    background: linear-gradient(135deg, rgba(245, 158, 11, 0.2) 0%, rgba(245, 158, 11, 0.1) 100%);
+    box-shadow: 0 2px 8px rgba(245, 158, 11, 0.2);
+}
+
+/* Entries List */
+.sec-entries-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.sec-entry-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 14px;
+    background: var(--sec-bg-soft);
+    border: 1px solid var(--sec-border);
+    border-radius: 12px;
+    position: relative;
+    transition: var(--sec-transition);
+}
+
+.sec-entry-item:hover {
+    border-color: var(--sec-gold);
+}
+
+.sec-entry-item-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.sec-entry-item-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--sec-text);
+    margin: 0 0 4px 0;
+}
+
+.sec-entry-item-preview {
+    font-size: 13px;
+    color: var(--sec-text-muted);
+    margin: 0 0 6px 0;
+    line-height: 1.4;
+}
+
+.sec-entry-item-meta {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 12px;
+    color: var(--sec-text-dim);
+}
+
+.sec-entry-delete {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 28px;
+    height: 28px;
+    background: transparent;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    cursor: pointer;
+    opacity: 0.4;
+    transition: var(--sec-transition);
+}
+
+.sec-entry-delete:hover {
+    opacity: 1;
+    background: rgba(239, 68, 68, 0.1);
+}
+
+/* Prayer Requests */
+.sec-prayer-form {
+    background: var(--sec-bg-soft);
+    border: 1px solid var(--sec-border);
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 20px;
+}
+
+.sec-prayer-section {
+    margin-bottom: 20px;
+}
+
+.sec-prayer-section-header {
+    margin-bottom: 12px;
+}
+
+.sec-prayer-section-header h4 {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--sec-text);
+    margin: 0;
+}
+
+.sec-prayer-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 14px;
+    background: var(--sec-bg-soft);
+    border: 1px solid var(--sec-border);
+    border-radius: 12px;
+    margin-bottom: 10px;
+    transition: var(--sec-transition);
+}
+
+.sec-prayer-item.answered {
+    border-color: var(--sec-hope);
+    background: linear-gradient(135deg, rgba(34, 197, 94, 0.08) 0%, rgba(34, 197, 94, 0.02) 100%);
+}
+
+.sec-prayer-item.ongoing {
+    border-color: var(--sec-spirit);
+    background: linear-gradient(135deg, rgba(168, 85, 247, 0.08) 0%, rgba(168, 85, 247, 0.02) 100%);
+}
+
+.sec-prayer-item-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.sec-prayer-item-text {
+    font-size: 14px;
+    color: var(--sec-text);
+    margin: 0 0 6px 0;
+    line-height: 1.5;
+}
+
+.sec-prayer-item-meta {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 12px;
+    color: var(--sec-text-dim);
+}
+
+.sec-prayer-actions {
+    display: flex;
+    gap: 6px;
+    flex-shrink: 0;
+}
+
+.sec-prayer-action-btn {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--sec-bg);
+    border: 1px solid var(--sec-border);
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: var(--sec-transition);
+}
+
+.sec-prayer-action-btn:hover {
+    transform: scale(1.05);
+}
+
+.sec-prayer-action-btn.answered:hover {
+    background: var(--sec-hope);
+    border-color: var(--sec-hope);
+}
+
+.sec-prayer-action-btn.ongoing:hover {
+    background: var(--sec-spirit);
+    border-color: var(--sec-spirit);
+}
+
+.sec-prayer-action-btn.delete:hover {
+    background: rgba(239, 68, 68, 0.2);
+    border-color: rgba(239, 68, 68, 0.4);
+}
+
+/* Testimonies */
+.sec-testimony-form {
+    background: var(--sec-bg-soft);
+    border: 1px solid var(--sec-border);
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 20px;
+}
+
+.sec-testimonies-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.sec-testimony-item {
+    background: var(--sec-bg-soft);
+    border: 1px solid var(--sec-border);
+    border-radius: 12px;
+    padding: 16px;
+    position: relative;
+    transition: var(--sec-transition);
+}
+
+.sec-testimony-item:hover {
+    border-color: var(--sec-gold);
+}
+
+.sec-testimony-item-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 10px;
+}
+
+.sec-testimony-icon {
+    font-size: 20px;
+}
+
+.sec-testimony-title {
+    flex: 1;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--sec-text);
+    margin: 0;
+}
+
+.sec-testimony-date {
+    font-size: 12px;
+    color: var(--sec-text-dim);
+}
+
+.sec-testimony-story {
+    font-size: 14px;
+    color: var(--sec-text-muted);
+    line-height: 1.6;
+    margin: 0 0 12px 0;
+}
+
+.sec-testimony-scripture {
+    margin-top: 12px;
+}
+
+.sec-scripture-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 10px;
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.15) 0%, rgba(59, 130, 246, 0.05) 100%);
+    border: 1px solid rgba(59, 130, 246, 0.3);
+    border-radius: 20px;
+    font-size: 12px;
+    color: var(--sec-faith);
+}
+
+.sec-testimony-delete {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 28px;
+    height: 28px;
+    background: transparent;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    cursor: pointer;
+    opacity: 0.4;
+    transition: var(--sec-transition);
+}
+
+.sec-testimony-delete:hover {
+    opacity: 1;
+    background: rgba(239, 68, 68, 0.1);
+}
+
+/* Scripture Memory */
+.sec-memory-form {
+    background: var(--sec-bg-soft);
+    border: 1px solid var(--sec-border);
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 20px;
+}
+
+.sec-memory-section {
+    margin-bottom: 20px;
+}
+
+.sec-memory-section-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--sec-text);
+    margin: 0 0 12px 0;
+}
+
+.sec-memory-section-title.sec-memorized {
+    color: var(--sec-hope);
+}
+
+.sec-memory-item {
+    background: var(--sec-bg-soft);
+    border: 1px solid var(--sec-border);
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 10px;
+    transition: var(--sec-transition);
+}
+
+.sec-memory-item:hover {
+    border-color: var(--sec-gold);
+}
+
+.sec-memory-item.memorized {
+    border-color: var(--sec-hope);
+    background: linear-gradient(135deg, rgba(34, 197, 94, 0.08) 0%, rgba(34, 197, 94, 0.02) 100%);
+}
+
+.sec-memory-item-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+.sec-memory-reference {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--sec-faith);
+}
+
+.sec-memory-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    background: var(--sec-hope);
+    border-radius: 50%;
+    font-size: 12px;
+    color: #fff;
+}
+
+.sec-memory-text {
+    font-size: 14px;
+    color: var(--sec-text-muted);
+    line-height: 1.6;
+    margin: 0;
+    font-style: italic;
+}
+
+.sec-memory-actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 12px;
+}
+
+.sec-memory-delete {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    cursor: pointer;
+    opacity: 0.5;
+    transition: var(--sec-transition);
+}
+
+.sec-memory-delete:hover {
+    opacity: 1;
+    background: rgba(239, 68, 68, 0.1);
+}
+
+/* Empty State */
+.sec-empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    text-align: center;
+}
+
+.sec-empty-icon {
+    font-size: 48px;
+    margin-bottom: 12px;
+    opacity: 0.6;
+}
+
+.sec-empty-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--sec-text);
+    margin: 0 0 6px 0;
+}
+
+.sec-empty-desc {
+    font-size: 14px;
+    color: var(--sec-text-dim);
+    margin: 0;
+}
+
+.sec-empty-message {
+    font-size: 13px;
+    color: var(--sec-text-dim);
+    font-style: italic;
+    text-align: center;
+    padding: 16px;
+}
+
+/* Mobile Adjustments for Journal */
+@media (max-width: 480px) {
+    .sec-journal-stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .sec-journal-stat-value {
+        font-size: 16px;
+    }
+    
+    .sec-journal-nav-btn {
+        min-width: 50px;
+        padding: 8px 4px;
+    }
+    
+    .sec-journal-nav-icon {
+        font-size: 16px;
+    }
+    
+    .sec-journal-nav-label {
+        font-size: 9px;
+    }
+    
+    .sec-journal-quick-actions {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .sec-daily-prompt {
+        font-size: 14px;
+    }
+    
+    .sec-mood-btn {
+        width: 38px;
+        height: 38px;
+        font-size: 18px;
+    }
+}

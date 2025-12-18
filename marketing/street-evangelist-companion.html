@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Street Evangelist Companion | Free Ministry Tool for COOLJC</title>
+    <meta name="description" content="A free mobile-first Obsidian plugin for street ministry education and tracking. Built for the Church of Our Lord Jesus Christ.">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Street Evangelist Companion">
+    <meta property="og:description" content="Free street ministry tool for COOLJC ministers">
+    <meta property="og:type" content="website">
+    
+    <!-- Favicon (flame emoji as data URI) -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔥</text></svg>">
+    
+    <style>
+        /* Reset & Base */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --gold: #f59e0b;
+            --gold-dark: #d97706;
+            --gold-light: #fbbf24;
+            --spirit: #8b5cf6;
+            --fire: #ef4444;
+            --hope: #22c55e;
+            --water: #3b82f6;
+            --bg-dark: #0f172a;
+            --bg-soft: #1e293b;
+            --bg-muted: #334155;
+            --text: #f8fafc;
+            --text-muted: #94a3b8;
+            --border: #475569;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: var(--bg-dark);
+            color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* Typography */
+        h1, h2, h3, h4 {
+            line-height: 1.2;
+            font-weight: 700;
+        }
+
+        h1 { font-size: clamp(2rem, 5vw, 3.5rem); }
+        h2 { font-size: clamp(1.5rem, 4vw, 2.5rem); }
+        h3 { font-size: clamp(1.25rem, 3vw, 1.75rem); }
+
+        a {
+            color: var(--gold);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        a:hover {
+            color: var(--gold-light);
+        }
+
+        /* Layout */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        section {
+            padding: 80px 0;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            z-index: 100;
+            padding: 16px 0;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.25rem;
+            font-weight: 700;
+        }
+
+        .logo-icon {
+            font-size: 1.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            color: var(--gold);
+        }
+
+        .mobile-menu {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .mobile-menu { display: block; }
+        }
+
+        /* Hero Section */
+        .hero {
+            padding-top: 160px;
+            padding-bottom: 100px;
+            text-align: center;
+            background: linear-gradient(180deg, var(--bg-dark) 0%, var(--bg-soft) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(245, 158, 11, 0.15) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(245, 158, 11, 0.15);
+            border: 1px solid var(--gold);
+            padding: 8px 20px;
+            border-radius: 100px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--gold);
+            margin-bottom: 24px;
+        }
+
+        .hero h1 {
+            margin-bottom: 24px;
+            background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto 40px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 16px 32px;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
+            color: var(--bg-dark);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(245, 158, 11, 0.3);
+        }
+
+        .btn-secondary {
+            background: var(--bg-muted);
+            color: var(--text);
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            background: var(--border);
+        }
+
+        .hero-image {
+            margin-top: 60px;
+            position: relative;
+        }
+
+        .hero-image img {
+            max-width: 100%;
+            border-radius: 16px;
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Features Section */
+        .features {
+            background: var(--bg-soft);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-header h2 {
+            margin-bottom: 16px;
+        }
+
+        .section-header p {
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+        }
+
+        .feature-card {
+            background: var(--bg-dark);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 32px;
+            transition: all 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--gold);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 16px;
+        }
+
+        .feature-card h3 {
+            margin-bottom: 12px;
+        }
+
+        .feature-card p {
+            color: var(--text-muted);
+        }
+
+        /* Scripture Section */
+        .scripture-section {
+            background: linear-gradient(135deg, var(--bg-dark) 0%, #1a1a2e 100%);
+            text-align: center;
+        }
+
+        .scripture-quote {
+            font-size: clamp(1.25rem, 3vw, 1.75rem);
+            font-style: italic;
+            max-width: 800px;
+            margin: 0 auto 24px;
+            color: var(--gold-light);
+        }
+
+        .scripture-ref {
+            font-weight: 600;
+            color: var(--text-muted);
+        }
+
+        /* Tabs Preview */
+        .tabs-preview {
+            background: var(--bg-dark);
+        }
+
+        .tabs-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 16px;
+            margin-bottom: 40px;
+        }
+
+        @media (max-width: 768px) {
+            .tabs-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        .tab-item {
+            background: var(--bg-soft);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px 16px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .tab-item:hover, .tab-item.active {
+            border-color: var(--gold);
+            background: var(--bg-muted);
+        }
+
+        .tab-item.active {
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.2) 0%, rgba(217, 119, 6, 0.1) 100%);
+        }
+
+        .tab-icon {
+            font-size: 2rem;
+            margin-bottom: 8px;
+        }
+
+        .tab-label {
+            font-weight: 600;
+            font-size: 0.875rem;
+        }
+
+        .tab-content {
+            background: var(--bg-soft);
+            border-radius: 16px;
+            padding: 40px;
+            min-height: 300px;
+        }
+
+        .tab-content h3 {
+            margin-bottom: 16px;
+            color: var(--gold);
+        }
+
+        .tab-content ul {
+            list-style: none;
+            display: grid;
+            gap: 12px;
+        }
+
+        .tab-content li {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+
+        .tab-content li::before {
+            content: '✓';
+            color: var(--hope);
+            font-weight: bold;
+        }
+
+        /* COOLJC Section */
+        .cooljc-section {
+            background: var(--bg-soft);
+        }
+
+        .cooljc-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 24px;
+        }
+
+        .cooljc-card {
+            background: var(--bg-dark);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px;
+            text-align: center;
+        }
+
+        .cooljc-card-icon {
+            font-size: 2rem;
+            margin-bottom: 12px;
+        }
+
+        .cooljc-card h4 {
+            margin-bottom: 8px;
+            color: var(--gold);
+        }
+
+        .cooljc-card p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* Download Section */
+        .download-section {
+            background: linear-gradient(135deg, var(--bg-dark) 0%, var(--bg-soft) 100%);
+        }
+
+        .download-box {
+            background: var(--bg-soft);
+            border: 2px solid var(--gold);
+            border-radius: 24px;
+            padding: 48px;
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .download-box h2 {
+            margin-bottom: 16px;
+        }
+
+        .download-box p {
+            color: var(--text-muted);
+            margin-bottom: 32px;
+        }
+
+        .download-steps {
+            text-align: left;
+            background: var(--bg-dark);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 32px;
+        }
+
+        .download-steps h4 {
+            margin-bottom: 16px;
+            color: var(--gold);
+        }
+
+        .download-steps ol {
+            padding-left: 24px;
+        }
+
+        .download-steps li {
+            margin-bottom: 12px;
+            color: var(--text-muted);
+        }
+
+        .download-steps code {
+            background: var(--bg-muted);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+        }
+
+        /* Donation Section */
+        .donation-section {
+            background: var(--bg-soft);
+        }
+
+        .donation-box {
+            background: linear-gradient(135deg, var(--bg-dark) 0%, #1a1a2e 100%);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 48px;
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .donation-box h2 {
+            margin-bottom: 16px;
+        }
+
+        .donation-box > p {
+            color: var(--text-muted);
+            margin-bottom: 32px;
+        }
+
+        .donation-methods {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+
+        .donation-method {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            padding: 20px 16px;
+            background: var(--bg-soft);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+            color: var(--text);
+        }
+
+        .donation-method:hover {
+            border-color: var(--gold);
+            background: var(--bg-muted);
+            transform: translateY(-2px);
+        }
+
+        .donation-method-icon {
+            font-size: 1.75rem;
+        }
+
+        .donation-method-name {
+            font-weight: 600;
+            font-size: 0.875rem;
+        }
+
+        .donation-note {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            font-style: italic;
+        }
+
+        /* Testimonial */
+        .testimonial-section {
+            background: var(--bg-dark);
+        }
+
+        .testimonial-card {
+            background: var(--bg-soft);
+            border-radius: 16px;
+            padding: 40px;
+            max-width: 700px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .testimonial-quote {
+            font-size: 1.25rem;
+            font-style: italic;
+            margin-bottom: 24px;
+        }
+
+        .testimonial-author {
+            font-weight: 600;
+            color: var(--gold);
+        }
+
+        .testimonial-role {
+            color: var(--text-muted);
+            font-size: 0.875rem;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--bg-dark);
+            border-top: 1px solid var(--border);
+            padding: 60px 0 30px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-brand h3 {
+            margin-bottom: 16px;
+            color: var(--gold);
+        }
+
+        .footer-brand p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .footer-links h4 {
+            margin-bottom: 16px;
+            font-size: 1rem;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 8px;
+        }
+
+        .footer-links a {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid var(--border);
+            color: var(--text-muted);
+            font-size: 0.875rem;
+        }
+
+        /* Animations */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .float-animation {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        .pulse-animation {
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        /* Utilities */
+        .text-gold { color: var(--gold); }
+        .text-muted { color: var(--text-muted); }
+        .mt-4 { margin-top: 16px; }
+        .mb-4 { margin-bottom: 16px; }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <span class="logo-icon">🔥</span>
+                <span>Street Evangelist</span>
+            </div>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#tabs">What's Inside</a></li>
+                    <li><a href="#download">Download</a></li>
+                    <li><a href="#support">Support</a></li>
+                </ul>
+            </nav>
+            <button class="mobile-menu">☰</button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-badge pulse-animation">
+                ✨ 100% Free for Ministry Use
+            </div>
+            <h1>Street Evangelist Companion</h1>
+            <p class="hero-subtitle">
+                Equip yourself for effective street ministry with this powerful Obsidian plugin. 
+                Built by ministers, for ministers of the Church of Our Lord Jesus Christ.
+            </p>
+            <div class="hero-buttons">
+                <a href="#download" class="btn btn-primary">
+                    📥 Download Free
+                </a>
+                <a href="#features" class="btn btn-secondary">
+                    Learn More
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Scripture Section -->
+    <section class="scripture-section">
+        <div class="container">
+            <p class="scripture-quote">
+                "Go ye into all the world, and preach the gospel to every creature."
+            </p>
+            <p class="scripture-ref">— Mark 16:15</p>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-header">
+                <h2>Everything You Need for Street Ministry</h2>
+                <p>A comprehensive toolkit designed specifically for COOLJC evangelists</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">📜</div>
+                    <h3>Evangelism Timeline</h3>
+                    <p>Journey through 2000+ years of Gospel history. Learn from the Apostolic Age to modern revival movements.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🛠️</div>
+                    <h3>Ministry Toolkit</h3>
+                    <p>Track encounters, log outcomes, and view statistics. Know your impact and grow your outreach.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📚</div>
+                    <h3>Doctrine Reference</h3>
+                    <p>Complete COOLJC doctrinal guide including Oneness theology, Acts 2:38 salvation, and apologetics.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📝</div>
+                    <h3>Ministry Journal</h3>
+                    <p>Write daily entries, track prayer requests, record testimonies, and memorize key scriptures.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📱</div>
+                    <h3>Mobile-First Design</h3>
+                    <p>Take it with you on the streets. Optimized for touch, readable outdoors, works offline.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔗</div>
+                    <h3>Note Integration</h3>
+                    <p>Creates real Obsidian notes with YAML frontmatter. Your ministry data, your way.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tabs Preview Section -->
+    <section class="tabs-preview" id="tabs">
+        <div class="container">
+            <div class="section-header">
+                <h2>Five Powerful Tabs</h2>
+                <p>Explore what's inside the Street Evangelist Companion</p>
+            </div>
+            <div class="tabs-grid">
+                <div class="tab-item active" onclick="showTab(0)">
+                    <div class="tab-icon">🏠</div>
+                    <div class="tab-label">Home</div>
+                </div>
+                <div class="tab-item" onclick="showTab(1)">
+                    <div class="tab-icon">📜</div>
+                    <div class="tab-label">Timeline</div>
+                </div>
+                <div class="tab-item" onclick="showTab(2)">
+                    <div class="tab-icon">🛠️</div>
+                    <div class="tab-label">Toolkit</div>
+                </div>
+                <div class="tab-item" onclick="showTab(3)">
+                    <div class="tab-icon">📚</div>
+                    <div class="tab-label">Doctrine</div>
+                </div>
+                <div class="tab-item" onclick="showTab(4)">
+                    <div class="tab-icon">📝</div>
+                    <div class="tab-label">Journal</div>
+                </div>
+            </div>
+            
+            <!-- Tab Content Panels -->
+            <div class="tab-content" id="tab-0">
+                <h3>🏠 Home Dashboard</h3>
+                <ul>
+                    <li>Personalized greeting based on time of day</li>
+                    <li>Quick access buttons to all features</li>
+                    <li>Ministry statistics at a glance</li>
+                    <li>Daily scripture for encouragement</li>
+                    <li>Recent activity overview</li>
+                </ul>
+            </div>
+            <div class="tab-content" id="tab-1" style="display: none;">
+                <h3>📜 Evangelism Timeline</h3>
+                <ul>
+                    <li>7 historical eras from Apostolic Age to today</li>
+                    <li>25+ significant events with scripture</li>
+                    <li>Filter by category: All, Apostolic, COOLJC</li>
+                    <li>Learn from 2000 years of Gospel work</li>
+                    <li>Expandable sections with rich details</li>
+                </ul>
+            </div>
+            <div class="tab-content" id="tab-2" style="display: none;">
+                <h3>🛠️ Ministry Toolkit</h3>
+                <ul>
+                    <li>Quick encounter logging form</li>
+                    <li>Track outcomes: Prayer, Tract, Conversation, Salvation</li>
+                    <li>View complete encounter history</li>
+                    <li>Ministry statistics dashboard</li>
+                    <li>Search and filter past encounters</li>
+                </ul>
+            </div>
+            <div class="tab-content" id="tab-3" style="display: none;">
+                <h3>📚 Doctrine Reference</h3>
+                <ul>
+                    <li>COOLJC identity and core beliefs</li>
+                    <li>Oneness theology explained with scripture</li>
+                    <li>Acts 2:38 salvation plan breakdown</li>
+                    <li>Holiness standards reference</li>
+                    <li>Apologetics for 8 common objections</li>
+                </ul>
+            </div>
+            <div class="tab-content" id="tab-4" style="display: none;">
+                <h3>📝 Ministry Journal</h3>
+                <ul>
+                    <li>Daily journal entries with mood tracking</li>
+                    <li>Prayer request management (active/answered)</li>
+                    <li>Testimony recording system</li>
+                    <li>Scripture memory with progress tracking</li>
+                    <li>Creates real Obsidian notes with YAML</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- COOLJC Section -->
+    <section class="cooljc-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Built for COOLJC Ministers</h2>
+                <p>Grounded in Apostolic truth and Oneness doctrine</p>
+            </div>
+            <div class="cooljc-grid">
+                <div class="cooljc-card">
+                    <div class="cooljc-card-icon">☝️</div>
+                    <h4>Oneness Theology</h4>
+                    <p>One God manifested as Father, Son, and Holy Ghost. Jesus is that One God.</p>
+                </div>
+                <div class="cooljc-card">
+                    <div class="cooljc-card-icon">💧</div>
+                    <h4>Acts 2:38</h4>
+                    <p>Repent, be baptized in Jesus' name, receive the Holy Ghost with tongues.</p>
+                </div>
+                <div class="cooljc-card">
+                    <div class="cooljc-card-icon">✨</div>
+                    <h4>Holiness Standards</h4>
+                    <p>Living separated unto God in modesty, conduct, and spiritual devotion.</p>
+                </div>
+                <div class="cooljc-card">
+                    <div class="cooljc-card-icon">🛡️</div>
+                    <h4>Apologetics Ready</h4>
+                    <p>Answers to common objections about baptism, tongues, and the Godhead.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Download Section -->
+    <section class="download-section" id="download">
+        <div class="container">
+            <div class="download-box">
+                <h2>🔥 Get Started Today</h2>
+                <p>Street Evangelist Companion is completely free. Install it in minutes.</p>
+                
+                <div class="download-steps">
+                    <h4>Installation Steps:</h4>
+                    <ol>
+                        <li>Download <a href="https://obsidian.md" target="_blank">Obsidian</a> (free note-taking app)</li>
+                        <li>Open your vault's plugins folder: <code>.obsidian/plugins/</code></li>
+                        <li>Create folder: <code>street-evangelist-companion</code></li>
+                        <li>Copy the plugin files (<code>main.js</code>, <code>manifest.json</code>, <code>styles.css</code>)</li>
+                        <li>Enable in Obsidian: Settings → Community Plugins → Toggle ON</li>
+                        <li>Click the 🔥 flame icon and start ministering!</li>
+                    </ol>
+                </div>
+                
+                <a href="https://github.com/billaking/street-evangelist-companion" class="btn btn-primary" target="_blank">
+                    📥 Download from GitHub
+                </a>
+                <p class="mt-4 text-muted" style="font-size: 0.875rem;">
+                    Works on Windows, Mac, Linux, iOS, and Android
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Donation Section -->
+    <section class="donation-section" id="support">
+        <div class="container">
+            <div class="donation-box">
+                <h2>💛 Support This Ministry</h2>
+                <p>
+                    Street Evangelist Companion is free forever. But if this tool has blessed your ministry, 
+                    consider supporting its continued development.
+                </p>
+                
+                <div class="donation-methods">
+                    <a href="https://www.paypal.com/ncp/payment/J7B8GLBMP9V3G" class="donation-method" target="_blank">
+                        <span class="donation-method-icon">💳</span>
+                        <span class="donation-method-name">PayPal</span>
+                    </a>
+                    <a href="https://cash.app/$billaking777" class="donation-method" target="_blank">
+                        <span class="donation-method-icon">💵</span>
+                        <span class="donation-method-name">Cash App</span>
+                    </a>
+                    <a href="https://venmo.com/William-King-867" class="donation-method" target="_blank">
+                        <span class="donation-method-icon">📱</span>
+                        <span class="donation-method-name">Venmo</span>
+                    </a>
+                </div>
+                
+                <p class="donation-note">
+                    "The harvest truly is plenteous, but the labourers are few." — Matthew 9:37
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonial -->
+    <section class="testimonial-section">
+        <div class="container">
+            <div class="testimonial-card">
+                <p class="testimonial-quote">
+                    "This app has revolutionized how I prepare for street ministry. Having doctrine, 
+                    history, and tracking all in one place - it's exactly what we needed."
+                </p>
+                <p class="testimonial-author">— A COOLJC Minister</p>
+                <p class="testimonial-role">Greater Life Ministry</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <h3>🔥 Street Evangelist Companion</h3>
+                    <p>
+                        Equipping saints for the work of ministry. 
+                        Built with love for the Church of Our Lord Jesus Christ.
+                    </p>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#tabs">What's Inside</a></li>
+                        <li><a href="#download">Download</a></li>
+                        <li><a href="#support">Support</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="https://obsidian.md" target="_blank">Get Obsidian</a></li>
+                        <li><a href="https://github.com/billaking/street-evangelist-companion" target="_blank">GitHub</a></li>
+                        <li><a href="https://www.billaking.com" target="_blank">Greater Life Ministry</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Contact</h4>
+                    <ul>
+                        <li><a href="https://www.billaking.com" target="_blank">billaking.com</a></li>
+                        <li><a href="mailto:ministry@billaking.com">ministry@billaking.com</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2024 Greater Life Ministry. Free to use for the glory of God.</p>
+                <p class="mt-4">"Go ye therefore, and teach all nations" — Matthew 28:19</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript for Tabs -->
+    <script>
+        function showTab(index) {
+            // Update active tab buttons
+            document.querySelectorAll('.tab-item').forEach((tab, i) => {
+                tab.classList.toggle('active', i === index);
+            });
+
+            // Hide all tab content panels
+            for (let i = 0; i < 5; i++) {
+                const panel = document.getElementById('tab-' + i);
+                if (panel) {
+                    panel.style.display = (i === index) ? 'block' : 'none';
+                }
+            }
+        }
+
+        // Mobile menu toggle
+        document.querySelector('.mobile-menu').addEventListener('click', () => {
+            const nav = document.querySelector('.nav-links');
+            nav.style.display = nav.style.display === 'flex' ? 'none' : 'flex';
+            nav.style.flexDirection = 'column';
+            nav.style.position = 'absolute';
+            nav.style.top = '100%';
+            nav.style.left = '0';
+            nav.style.right = '0';
+            nav.style.background = 'var(--bg-dark)';
+            nav.style.padding = '20px';
+            nav.style.gap = '16px';
+        });
+    </script>
+</body>
+</html>
